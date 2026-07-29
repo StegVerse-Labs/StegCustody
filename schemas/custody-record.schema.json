@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stegverse.org/schemas/stegcustody/custody-record.schema.json",
+  "title": "StegCustody Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_id",
+    "item_type",
+    "item_name",
+    "current_legal_owner",
+    "current_operator",
+    "current_payer",
+    "current_beneficiary",
+    "current_liability_holder",
+    "intended_entity",
+    "custody_status",
+    "transition_method",
+    "evidence_refs",
+    "review_required"
+  ],
+  "properties": {
+    "record_id": {"type": "string", "minLength": 1},
+    "item_type": {"type": "string", "minLength": 1},
+    "item_name": {"type": "string", "minLength": 1},
+    "current_legal_owner": {"type": "string", "minLength": 1},
+    "current_custodian": {"type": ["string", "null"]},
+    "current_operator": {"type": "string", "minLength": 1},
+    "current_payer": {"type": "string", "minLength": 1},
+    "current_beneficiary": {"type": "string", "minLength": 1},
+    "current_authority_holder": {"type": ["string", "null"]},
+    "current_liability_holder": {"type": "string", "minLength": 1},
+    "intended_entity": {"type": "string", "minLength": 1},
+    "custody_status": {
+      "type": "string",
+      "enum": [
+        "PERSONAL_UNCLASSIFIED",
+        "PERSONAL_FOR_BUSINESS",
+        "PUBLIC_ENTITY",
+        "COMMERCIAL_ENTITY",
+        "SHARED_PENDING_REVIEW",
+        "TRANSFER_APPROVED",
+        "TRANSFER_IN_PROGRESS",
+        "TRANSFERRED",
+        "LICENSED_NOT_TRANSFERRED",
+        "REIMBURSEMENT_PENDING",
+        "RETAINED_PERSONALLY"
+      ]
+    },
+    "transition_method": {
+      "type": "string",
+      "enum": [
+        "none",
+        "assignment",
+        "sale",
+        "contribution",
+        "license",
+        "reimbursement",
+        "retention",
+        "other"
+      ]
+    },
+    "effective_date": {"type": ["string", "null"], "format": "date"},
+    "evidence_refs": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "review_required": {"type": "boolean"},
+    "notes": {"type": ["string", "null"]}
+  }
+}
